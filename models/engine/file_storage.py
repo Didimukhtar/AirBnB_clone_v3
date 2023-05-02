@@ -36,7 +36,7 @@ class FileStorage:
 
     def get(self, cls, id):
         """retrieve one object using it's id"""
-        if not any(cls is classes[clss] for clss in classes):
+        if not any((cls is classes[clss] or cls == clss) for clss in classes):
             return None
         for obj in self.__objects.values():
             if cls != obj.__class__ and cls != obj.__class__.__name__:
