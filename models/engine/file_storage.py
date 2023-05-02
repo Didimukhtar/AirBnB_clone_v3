@@ -49,9 +49,9 @@ class FileStorage:
         """count number of objects in storage"""
         total = 0
         for obj in self.__objects.values():
-            if not (
-                    cls or cls == obj.__class__ or
-                    cls == obj.__class__.__name__
+            if (
+                not cls or cls == obj.__class__ or
+                cls == obj.__class__.__name__
             ):
                 total += 1
         return total
