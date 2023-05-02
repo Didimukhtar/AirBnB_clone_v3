@@ -1,26 +1,30 @@
 #!/usr/bin/python3
-"""
-Index view
-"""
-from . import app_views
+"""This returns the status of our api"""
 from models import storage
-from ... import jsonify
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.user import User
+from models.place import Place
+from models.review import Review
+from api.v1.views import app_views
+from flask import jsonify
 
 
-@app_views.route("/status", strict_slashes=False)
+@app_views.route('/status', strict_slashes=False)
 def status():
-    """view the app status"""
-    return jsonify({"status": "OK"})
+    """This returns our status if successfully connected"""
+    return jsonify({'status': "OK"})
 
 
-@app_views.route("/stats", strict_slashes=False)
+@app_views.route('/stats', strict_slashes=False)
 def stats():
-    """view the app stats"""
-    return jsonify({
-        "amenities": storage.count("Amenity"),
-        "cities": storage.count("City"),
-        "places": storage.count("Place"),
-        "reviews": storage.count("Review"),
-        "states": storage.count("State"),
-        "users": storage.count("User"),
-    })
+    """This returns our stats if successfully connected"""
+    end = {}
+    end['amenities'] = storage.count(Amenity)
+    end['cities'] = storage.count(City)
+    end['places'] = storage.count(Place)
+    end['reviews'] = storage.count(Review)
+    end['states'] = storage.count(State)
+    end['users'] = storage.count(User)
+    return jsonify(end)
