@@ -10,7 +10,7 @@ from ...import jsonify
 from flask import abort, request
 
 
-@app_views.route("/states/<uuid:state_id>/cities", strict_slashes=False,
+@app_views.route("/amenities/<uuid:state_id>/cities", strict_slashes=False,
                  methods=["GET", "POST"])
 def cities_by_state(state_id):
     """create and retrieve cities"""
