@@ -34,7 +34,7 @@ def get_all_states(state_id):
         if "name" not in data:
             return jsonify({"error": "Missing name"}, status=400)
         state = State(**data)
-        storage.new(state)
+        state.save()
         return jsonify(state.to_dict(), status=201)
     elif request.method == "PUT":
         if not request.is_json:
@@ -54,4 +54,5 @@ def get_all_states(state_id):
         if not state:
             abort(404)
         state.delete()
+        storage.save()
         return jsonify({})
